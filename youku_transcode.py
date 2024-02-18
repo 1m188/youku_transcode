@@ -20,7 +20,6 @@ class Window(QWidget):
 
     def initUI(self):
         self.setWindowTitle("优酷转码GUI工具")
-        self.setFixedSize(800, 600)
 
         rect = self.frameGeometry()
         rect.moveCenter(QApplication.desktop().availableGeometry().center())
@@ -31,21 +30,12 @@ class Window(QWidget):
         ffmpegLabel.setAlignment(Qt.AlignCenter)
         ffmpegLabel.setFont(QFont("微软雅黑", 12))
         ffmpegLabel.setText("ffmpeg文件路径")
-        ffmpegLabel.resize(ffmpegLabel.sizeHint())
-        ffmpegLabel.move(int(self.width() / 2 - ffmpegLabel.width() / 2), 100)
 
         self.ffmpegLineEdit = QLineEdit(self)
         self.ffmpegLineEdit.setReadOnly(True)
-        self.ffmpegLineEdit.resize(ffmpegLabel.size())
-        self.ffmpegLineEdit.move(ffmpegLabel.x(),
-                                 ffmpegLabel.y() + ffmpegLabel.height() + 10)
 
         ffmpegButton = QPushButton(self)
         ffmpegButton.setText("浏览")
-        ffmpegButton.resize(ffmpegButton.sizeHint())
-        ffmpegButton.move(
-            self.ffmpegLineEdit.x() + self.ffmpegLineEdit.width() + 5,
-            self.ffmpegLineEdit.y())
         ffmpegButton.clicked.connect(self.ffmpegButtonClicked)
 
         #.kux源文件选择
@@ -53,21 +43,12 @@ class Window(QWidget):
         srcDirLabel.setAlignment(Qt.AlignCenter)
         srcDirLabel.setFont(QFont("微软雅黑", 12))
         srcDirLabel.setText(".kux源文件")
-        srcDirLabel.resize(srcDirLabel.sizeHint())
-        srcDirLabel.move(100, 300)
 
         self.srcDirLineEdit = QLineEdit(self)
         self.srcDirLineEdit.setReadOnly(True)
-        self.srcDirLineEdit.resize(srcDirLabel.size())
-        self.srcDirLineEdit.move(srcDirLabel.x(),
-                                 srcDirLabel.y() + srcDirLabel.height() + 10)
 
         srcDirButton = QPushButton(self)
         srcDirButton.setText("浏览")
-        srcDirButton.resize(srcDirButton.sizeHint())
-        srcDirButton.move(
-            self.srcDirLineEdit.x() + self.srcDirLineEdit.width() + 5,
-            self.srcDirLineEdit.y())
         srcDirButton.clicked.connect(self.srcDirButtonClicked)
 
         #转换文件目标目录选择
@@ -75,22 +56,12 @@ class Window(QWidget):
         aimDirLabel.setAlignment(Qt.AlignCenter)
         aimDirLabel.setFont(QFont("微软雅黑", 12))
         aimDirLabel.setText("转码目标文件目录")
-        aimDirLabel.resize(aimDirLabel.sizeHint())
-        aimDirLabel.move(srcDirButton.x() + srcDirButton.width() + 15,
-                         srcDirLabel.y())
 
         self.aimDirLineEdit = QLineEdit(self)
         self.aimDirLineEdit.setReadOnly(True)
-        self.aimDirLineEdit.resize(aimDirLabel.size())
-        self.aimDirLineEdit.move(aimDirLabel.x(), self.srcDirLineEdit.y())
 
         aimDirButton = QPushButton(self)
         aimDirButton.setText("浏览")
-        aimDirButton.resize(aimDirButton.sizeHint())
-        aimDirButton.move(
-            self.aimDirLineEdit.x() + self.aimDirLineEdit.width() +
-            srcDirButton.x() - self.srcDirLineEdit.width() -
-            self.srcDirLineEdit.x(), self.aimDirLineEdit.y())
         aimDirButton.clicked.connect(self.aimDirButtonClicked)
 
         #转码格式
@@ -98,25 +69,29 @@ class Window(QWidget):
         transcodeFormatlabel.setAlignment(Qt.AlignCenter)
         transcodeFormatlabel.setFont(QFont("微软雅黑", 12))
         transcodeFormatlabel.setText("转码格式")
-        transcodeFormatlabel.resize(transcodeFormatlabel.sizeHint())
-        transcodeFormatlabel.move(aimDirButton.x() + aimDirButton.width() + 15,
-                                  aimDirLabel.y())
 
         self.transcodeFormatComboBox = QComboBox(self)
         self.transcodeFormatComboBox.addItem(".mp4")
-        self.transcodeFormatComboBox.resize(
-            self.transcodeFormatComboBox.sizeHint())
-        self.transcodeFormatComboBox.move(
-            transcodeFormatlabel.x(),
-            transcodeFormatlabel.y() + transcodeFormatlabel.height() + 10)
 
         transcodeButton = QPushButton(self)
         transcodeButton.setFont(QFont("微软雅黑", 12))
         transcodeButton.setText("开始转码")
-        transcodeButton.resize(transcodeButton.sizeHint())
-        transcodeButton.move(
-            int(self.width() / 2 - transcodeButton.width() / 2), 500)
         transcodeButton.clicked.connect(self.transcodeButtonClicked)
+
+        # 布局
+        layout = QGridLayout(self)
+        layout.addWidget(ffmpegLabel, 0, 0, 1, 1)
+        layout.addWidget(self.ffmpegLineEdit, 0, 1, 1, 1)
+        layout.addWidget(ffmpegButton, 0, 2, 1, 1)
+        layout.addWidget(srcDirLabel, 1, 0, 1, 1)
+        layout.addWidget(self.srcDirLineEdit, 1, 1, 1, 1)
+        layout.addWidget(srcDirButton, 1, 2, 1, 1)
+        layout.addWidget(aimDirLabel, 2, 0, 1, 1)
+        layout.addWidget(self.aimDirLineEdit, 2, 1, 1, 1)
+        layout.addWidget(aimDirButton, 2, 2, 1, 1)
+        layout.addWidget(transcodeFormatlabel, 3, 0, 1, 1)
+        layout.addWidget(self.transcodeFormatComboBox, 3, 1, 1, 1)
+        layout.addWidget(transcodeButton, 3, 2, 1, 1)
 
     def ffmpegButtonClicked(self):
         self.ffmpegDir = QFileDialog.getOpenFileName(self, "ffmpeg路径选择")[0]
