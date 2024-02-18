@@ -1,0 +1,11 @@
+[style]  
+based_on_style = google  
+#column_limit = 100  
+#indent_width = 4  
+#split_before_first_argument = true  
+#split_before_named_assigns = true  
+#split_penalty_import_from = 100  
+#split_penalty_after_opening_paren = 20  
+#split_penalty_before_closing_paren = 20  
+#split_penalty_after_comma = 5  
+#split_penalty_before_comma = 5
