@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 
 import sys
 import os
+from pathlib import Path
 
 
 class Window(QWidget):
@@ -33,6 +34,9 @@ class Window(QWidget):
 
         self.ffmpegLineEdit = QLineEdit(self)
         self.ffmpegLineEdit.setReadOnly(True)
+        # 默认ffmpeg
+        p = Path(__file__).resolve().parent / 'nplayer' / 'ffmpeg.exe'
+        self.ffmpegLineEdit.setText(str(p))
 
         ffmpegButton = QPushButton(self)
         ffmpegButton.setText("浏览")
