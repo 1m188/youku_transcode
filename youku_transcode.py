@@ -32,7 +32,7 @@ class Window(QWidget):
         ffmpegLabel.setFont(QFont("微软雅黑", 12))
         ffmpegLabel.setText("ffmpeg文件路径")
         ffmpegLabel.resize(ffmpegLabel.sizeHint())
-        ffmpegLabel.move(self.width() / 2 - ffmpegLabel.width() / 2, 100)
+        ffmpegLabel.move(int(self.width() / 2 - ffmpegLabel.width() / 2), 100)
 
         self.ffmpegLineEdit = QLineEdit(self)
         self.ffmpegLineEdit.setReadOnly(True)
@@ -114,8 +114,8 @@ class Window(QWidget):
         transcodeButton.setFont(QFont("微软雅黑", 12))
         transcodeButton.setText("开始转码")
         transcodeButton.resize(transcodeButton.sizeHint())
-        transcodeButton.move(self.width() / 2 - transcodeButton.width() / 2,
-                             500)
+        transcodeButton.move(
+            int(self.width() / 2 - transcodeButton.width() / 2), 500)
         transcodeButton.clicked.connect(self.transcodeButtonClicked)
 
     def ffmpegButtonClicked(self):
