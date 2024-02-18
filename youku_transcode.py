@@ -1,9 +1,13 @@
-from PyQt5.Qt import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+
 import sys
 import os
 
 
 class Window(QWidget):
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
